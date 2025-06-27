@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sales_reps/core/theme/app_colours.dart';
 
 class AuthButton extends StatelessWidget {
-  const AuthButton({super.key});
+  final String buttonText;
+  final VoidCallback onTap;
+  const AuthButton({super.key, required this.buttonText, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +21,15 @@ class AuthButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(7),
       ),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onTap,
         style: ElevatedButton.styleFrom(
           fixedSize: const Size(395, 55),
           backgroundColor: Colours.transparentColor,
           shadowColor: Colours.transparentColor,
         ),
         child: Text(
-          'Sign Up',
-          style: TextStyle(
+          buttonText,
+          style: const TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.w600,
           ),
