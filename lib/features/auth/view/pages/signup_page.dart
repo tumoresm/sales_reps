@@ -64,14 +64,17 @@ class _SignupPageState extends State<SignupPage> {
                 isObscureText: true,
               ),
               const SizedBox(height: 20.0),
-              const AuthButton(),
+              AuthButton(
+                buttonText: 'Sign Up',
+                onTap: () {},
+              ),
               const SizedBox(height: 20.0),
               RichText(
                 text: TextSpan(
                   text: 'Already have an account? ',
                   style: Theme.of(context).textTheme.titleMedium,
-                  children: [
-                    const TextSpan(
+                  children: const [
+                    TextSpan(
                       text: 'Sign In',
                       style: TextStyle(
                         color: Colours.gradient2,
