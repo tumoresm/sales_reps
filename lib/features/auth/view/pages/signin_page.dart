@@ -3,23 +3,19 @@ import 'package:sales_reps/core/theme/app_colours.dart';
 import 'package:sales_reps/features/auth/view/widgets/auth_button.dart';
 import 'package:sales_reps/features/auth/view/widgets/custom_field.dart';
 
-class SignupPage extends StatefulWidget {
-  const SignupPage({super.key});
+class SigninPage extends StatefulWidget {
+  const SigninPage({super.key});
 
   @override
-  State<SignupPage> createState() => _SignupPageState();
+  State<SigninPage> createState() => _SignupPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
-  final nameController = TextEditingController();
-  final phoneController = TextEditingController();
+class _SignupPageState extends State<SigninPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
   void dispose() {
-    nameController.dispose();
-    phoneController.dispose();
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -36,23 +32,13 @@ class _SignupPageState extends State<SignupPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Sign Up.',
+                'Sign In.',
                 style: TextStyle(
                   fontSize: 50,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 30.0),
-              CustomField(
-                controller: nameController,
-                hintText: 'Full Name',
-              ),
-              const SizedBox(height: 15.0),
-              CustomField(
-                hintText: 'Mobile Number',
-                controller: phoneController,
-              ),
-              const SizedBox(height: 15.0),
               CustomField(
                 hintText: 'Email',
                 controller: emailController,
@@ -65,17 +51,17 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 20.0),
               AuthButton(
-                buttonText: 'Sign Up',
+                buttonText: 'Sign In',
                 onTap: () {},
               ),
               const SizedBox(height: 20.0),
               RichText(
                 text: TextSpan(
-                  text: 'Already have an account? ',
+                  text: 'Don\'t have an account? ',
                   style: Theme.of(context).textTheme.titleMedium,
                   children: const [
                     TextSpan(
-                      text: 'Sign In',
+                      text: 'Sign Up',
                       style: TextStyle(
                         color: Colours.gradient2,
                         fontWeight: FontWeight.bold,
