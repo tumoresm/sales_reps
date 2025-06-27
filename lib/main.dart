@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sales_reps/core/theme/theme.dart';
-import 'package:sales_reps/features/auth/view/pages/signup_page.dart';
+import 'package:sales_reps/features/auth/view/pages/signin_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -14,7 +14,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'Sales Reps',
       theme: AppTheme.darkThemeMode,
-      home: const SignupPage(),
+      home: const SigninPage(),
     );
   }
 }
