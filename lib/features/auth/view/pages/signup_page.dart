@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:sales_reps/core/theme/app_colours.dart';
 import 'package:sales_reps/features/auth/repositories/auth_remote_repos.dart';
 import 'package:sales_reps/features/auth/view/pages/signin_page.dart';
 import 'package:sales_reps/features/auth/view/widgets/auth_button.dart';
 import 'package:sales_reps/features/auth/view/widgets/custom_field.dart';
+import 'package:fpdart/fpdart.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -70,12 +70,17 @@ class _SignupPageState extends State<SignupPage> {
               AuthButton(
                 buttonText: 'Sign Up',
                 onTap: () async {
-                  await AuthRemoteRepository().signup(
+                  final res = await AuthRemoteRepository().signup(
                     name: nameController.text,
                     phone: phoneController.text,
                     email: emailController.text,
                     password: passwordController.text,
                   );
+
+                  final val = switch (res) {
+                    Left(value: final l) => l,
+                    Right(value: final r) => r.toString(),
+                  };
                 },
               ),
               const SizedBox(height: 20.0),
