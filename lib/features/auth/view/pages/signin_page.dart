@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sales_reps/core/theme/app_colours.dart';
+import 'package:sales_reps/features/auth/repositories/auth_remote_repos.dart';
+import 'package:sales_reps/features/auth/view/pages/signup_page.dart';
 import 'package:sales_reps/features/auth/view/widgets/auth_button.dart';
 import 'package:sales_reps/features/auth/view/widgets/custom_field.dart';
 
@@ -52,22 +55,37 @@ class _SignupPageState extends State<SigninPage> {
               const SizedBox(height: 20.0),
               AuthButton(
                 buttonText: 'Sign In',
-                onTap: () {},
+                onTap: () async {
+                  await AuthRemoteRepository().signin(
+                    email: emailController.text,
+                    password: passwordController.text,
+                  );
+                },
               ),
               const SizedBox(height: 20.0),
-              RichText(
-                text: TextSpan(
-                  text: 'Don\'t have an account? ',
-                  style: Theme.of(context).textTheme.titleMedium,
-                  children: const [
-                    TextSpan(
-                      text: 'Sign Up',
-                      style: TextStyle(
-                        color: Colours.gradient2,
-                        fontWeight: FontWeight.bold,
-                      ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SignupPage(),
                     ),
-                  ],
+                  );
+                },
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Don\'t have an account? ',
+                    style: Theme.of(context).textTheme.titleMedium,
+                    children: const [
+                      TextSpan(
+                        text: 'Sign Up',
+                        style: TextStyle(
+                          color: Colours.gradient2,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
