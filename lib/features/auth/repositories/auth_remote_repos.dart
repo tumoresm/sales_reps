@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:fpdart/fpdart.dart' show Either, Left, Right;
 import 'package:http/http.dart' as http;
+import 'package:sales_reps/core/failure/failure.dart';
 
 class AuthRemoteRepository {
-  Future<Map<String, dynamic>> signup({
+  Future<Either<AppFailure, Map<String, dynamic>>> signup({
     required String name,
     required String phone,
     required String email,
@@ -28,13 +30,13 @@ class AuthRemoteRepository {
       );
       if (response.statusCode != 201) {
         // handle error
-        return {'error': 'Failed to signup', 'statusCode': response.statusCode};
+        return Left(AppFailure.server(response.body));
       } else {
         final user = jsonDecode(response.body) as Map<String, dynamic>;
-        return user;
+        return Right(user);
       }
     } catch (e) {
-      return {'error': e.toString()};
+      return Left(AppFailure.custom(e.toString()));
     }
   }
 
