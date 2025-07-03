@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:sales_reps/core/theme/app_colours.dart';
+import 'package:sales_reps/features/auth/repositories/auth_remote_repos.dart';
+import 'package:sales_reps/features/auth/view/pages/signin_page.dart';
 import 'package:sales_reps/features/auth/view/widgets/auth_button.dart';
 import 'package:sales_reps/features/auth/view/widgets/custom_field.dart';
 
@@ -66,22 +69,39 @@ class _SignupPageState extends State<SignupPage> {
               const SizedBox(height: 20.0),
               AuthButton(
                 buttonText: 'Sign Up',
-                onTap: () {},
+                onTap: () async {
+                  await AuthRemoteRepository().signup(
+                    name: nameController.text,
+                    phone: phoneController.text,
+                    email: emailController.text,
+                    password: passwordController.text,
+                  );
+                },
               ),
               const SizedBox(height: 20.0),
-              RichText(
-                text: TextSpan(
-                  text: 'Already have an account? ',
-                  style: Theme.of(context).textTheme.titleMedium,
-                  children: const [
-                    TextSpan(
-                      text: 'Sign In',
-                      style: TextStyle(
-                        color: Colours.gradient2,
-                        fontWeight: FontWeight.bold,
-                      ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SigninPage(),
                     ),
-                  ],
+                  );
+                },
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Already have an account? ',
+                    style: Theme.of(context).textTheme.titleMedium,
+                    children: const [
+                      TextSpan(
+                        text: 'Sign In',
+                        style: TextStyle(
+                          color: Colours.gradient2,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
