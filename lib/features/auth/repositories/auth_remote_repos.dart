@@ -15,7 +15,7 @@ class AuthRemoteRepository {
     try {
       final response = await http.post(
         Uri.parse(
-          'http://127.0.0.1:8000/auth/signup',
+          '/auth/signup',
         ),
         headers: {
           'Content-Type': 'application/json',
