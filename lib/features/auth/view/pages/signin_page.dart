@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:sales_reps/core/theme/app_colours.dart';
 import 'package:sales_reps/features/auth/repositories/auth_remote_repos.dart';
 import 'package:sales_reps/features/auth/view/pages/signup_page.dart';
@@ -55,10 +56,16 @@ class _SignupPageState extends State<SigninPage> {
               AuthButton(
                 buttonText: 'Sign In',
                 onTap: () async {
-                  await AuthRemoteRepository().signin(
+                  final res = await AuthRemoteRepository().signin(
                     email: emailController.text,
                     password: passwordController.text,
                   );
+
+                  final val = switch (res) {
+                    Left(value: final l) => l,
+                    Right(value: final r) => r,
+                  };
+                  print(val);
                 },
               ),
               const SizedBox(height: 20.0),
